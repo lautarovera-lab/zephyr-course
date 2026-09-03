@@ -1,0 +1,23 @@
+menu "Demo Application"
+
+config APP_BLINKY_ENABLED
+	bool "Enable application blinky"
+
+choice APP_LOG_VERBOSITY
+	prompt "App log verbosity"
+	default APP_LOG_VERBOSITY_INF
+
+config APP_LOG_VERBOSITY_DBG
+	bool "Debug"
+
+config APP_LOG_VERBOSITY_INF
+	bool "Info"
+
+config APP_LOG_VERBOSITY_WEN
+	bool "Warning"
+
+endchoice
+
+endmenu
+
+source "Kconfig.zephyr"
