@@ -1,0 +1,10 @@
+menu "Heartbeat LED"
+
+config APP_HEARTBEAT_PERIOD_MS
+	int "Heartbeat LED period (ms)"
+	default 500
+	range 100 2000
+	help
+	  Sleep duration between heartbeat LED toggles.
+
+endmenu

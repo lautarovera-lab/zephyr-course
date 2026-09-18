@@ -72,4 +72,6 @@ endif # LED_ADVANCED
 
 endif # LED_SUBSYSTEM
 
+rsource "Kconfig.heartbeat"
+
 source "Kconfig.zephyr"
