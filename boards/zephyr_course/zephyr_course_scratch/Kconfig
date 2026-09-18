@@ -1,0 +1,8 @@
+# Copyright (c) 2026 Lautaro Vera
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_ZEPHYR_COURSE_SCRATCH
+	# Clock setup for the console UART, before devices are initialized.
+	select BOARD_EARLY_INIT_HOOK
+	# "Board Initialized" message, after devices are up but before main().
+	select BOARD_LATE_INIT_HOOK

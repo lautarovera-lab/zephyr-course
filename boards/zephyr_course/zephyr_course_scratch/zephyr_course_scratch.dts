@@ -1,0 +1,64 @@
+/*
+ * Copyright (c) 2026 Lautaro Vera
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+
+#include <nxp/nxp_mcxn23x.dtsi>
+#include <nxp/mcx/MCXN236VDF-pinctrl.h>
+
+/ {
+	model = "Zephyr Course Scratch Board";
+	compatible = "nxp,mcxn236", "nxp,mcx";
+
+	chosen {
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash;
+		zephyr,flash-controller = &fmu;
+		zephyr,console = &flexcomm4_lpuart4;
+		zephyr,shell-uart = &flexcomm4_lpuart4;
+	};
+};
+
+/* The SoC dtsi declares 256K; this part only populates 192K of sram0. */
+&sram0 {
+	reg = <0x20000000 DT_SIZE_K(192)>;
+};
+
+&fmu {
+	status = "okay";
+};
+
+/*
+ * The SoC leaves every kernel timer candidate disabled, so the board has to
+ * pick one. SysTick is clocked from the core clock (FRO12M, see board.c),
+ * which is what CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC declares.
+ */
+&systick {
+	status = "okay";
+};
+
+&pinctrl {
+	pinmux_flexcomm4_lpuart: pinmux_flexcomm4_lpuart {
+		group0 {
+			/* PIO1_8 = RX, PIO1_9 = TX: the MCU-Link VCOM pins. */
+			pinmux = <FC4_P0_PIO1_8>,
+				<FC4_P1_PIO1_9>;
+			slew-rate = "fast";
+			drive-strength = "low";
+			input-enable;
+		};
+	};
+};
+
+&flexcomm4 {
+	status = "okay";
+};
+
+&flexcomm4_lpuart4 {
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&pinmux_flexcomm4_lpuart>;
+	pinctrl-names = "default";
+};

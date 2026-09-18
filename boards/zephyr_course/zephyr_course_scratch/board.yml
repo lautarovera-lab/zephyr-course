@@ -1,0 +1,6 @@
+board:
+  name: zephyr_course_scratch
+  full_name: Zephyr Course Scratch Board
+  vendor: zephyr_course
+  socs:
+  - name: mcxn236

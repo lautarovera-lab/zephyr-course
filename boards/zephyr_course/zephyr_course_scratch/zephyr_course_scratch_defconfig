@@ -1,0 +1,11 @@
+CONFIG_CONSOLE=y
+CONFIG_SERIAL=y
+CONFIG_UART_CONSOLE=y
+
+# The core runs off FRO12M (see board_early_init_hook), not the 150 MHz PLL
+# that the SoC Kconfig assumes by default.
+CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC=12000000
+
+# Cortex-M33 comes out of reset in Secure state; the image must be built as the
+# secure image or it does not boot.
+CONFIG_TRUSTED_EXECUTION_SECURE=y
