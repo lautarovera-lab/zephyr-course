@@ -56,8 +56,6 @@ config LED_FADE_DURATION
 	int "LED fade duration (ms)"
 	default 500
 
-endif # LED_ADVANCED
-
 menu "Expert settings"
 
 config LED_DEBUG
@@ -69,6 +67,8 @@ config LED_CUSTOM_BLINK
 	default n
 
 endmenu
+
+endif # LED_ADVANCED
 
 endif # LED_SUBSYSTEM
 
